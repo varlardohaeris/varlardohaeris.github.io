@@ -159,7 +159,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/05/29/debug-openjdk/" class="post-title-link" itemprop="url">debug-openjdk</a>
+            <a href="/2024/05/29/debug-openjdk/" class="post-title-link" itemprop="url">debug-openjdk-with-clion</a>
         </h2>
 
         <div class="post-meta">
@@ -168,10 +168,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-05-29 22:16:43 / 修改时间：23:06:06" itemprop="dateCreated datePublished" datetime="2024-05-29T22:16:43+08:00">2024-05-29</time>
+              <time title="创建时间：2024-05-29 22:16:43" itemprop="dateCreated datePublished" datetime="2024-05-29T22:16:43+08:00">2024-05-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-06-17 22:12:49" itemprop="dateModified" datetime="2024-06-17T22:12:49+08:00">2024-06-17</time>
+              </span>
 
           
 
@@ -185,11 +191,12 @@
 
       
           <p>使用ide阅读openjdk</p>
-<h1 id="build"><a href="#build" class="headerlink" title="build"></a>build</h1><p>编译构建debug版本的openjdk</p>
+<h1 id="阅读hotspot虚拟机代码"><a href="#阅读hotspot虚拟机代码" class="headerlink" title="阅读hotspot虚拟机代码"></a>阅读hotspot虚拟机代码</h1><h2 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h2><p>编译构建debug版本的openjdk</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash configure --with-debug-level=slowdebug --with-native-debug-symbols=internal  --disable-warnings-as-errors</span><br><span class="line">make images</span><br><span class="line">make compile-commands-hotspot</span><br></pre></td></tr></table></figure>
 <p>上面命令会生成<code>build/macosx-x86_64-server-slowdebug/compile_commands.json</code>, 记录了每个c&#x2F;cpp文件如何被编译的,可以帮助ide做代码跳转,代码提示,代码分析.<br>如果一个c&#x2F;cpp文件不能自动生成这个文件,可以考虑使用python的compiledb工具. cmake工程,ninja,meson等比较现代的构建工具一般都可以生成这个文件.不过如果ide能自动识别cmake,ninja等工程的话,没必要使用这个<code>compile_commands.json</code>文件.</p>
 <p>把这个文件拷贝到openjdk工程的根目录,也可以做软连接.</p>
 <h2 id="使用clion打开openjdk工程"><a href="#使用clion打开openjdk工程" class="headerlink" title="使用clion打开openjdk工程"></a>使用clion打开openjdk工程</h2><p><code>File-&gt;Open</code> 选中<code>compile_commands.json</code>,遇到提示显示打开为工程.</p>
+<p><img src="/image.png" alt="call hierarchy 和 find usage"></p>
 
       
     </div>
